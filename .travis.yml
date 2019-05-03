@@ -1,0 +1,20 @@
+language: bash
+services: docker
+
+env:
+  - VERSION=5.6 VARIANT=xenial/apache
+
+before_script:
+  - env | sort
+  - cd "$VERSION/$VARIANT"
+  - SUBVARIANT="${VARIANT#*/}"
+  - image="php:${VERSION}-${SUBVARIANT}-${VARIANT%/*}"
+
+script:
+  - travis_retry docker build -t "$image" .
+  - ~/official-images/test/run.sh "$image"
+
+after_script:
+  - docker images
+
+# vim:set et ts=2 sw=2:
