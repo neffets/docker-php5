@@ -1,0 +1,6 @@
+#!/bin/bash
+
+docker build -t neffets/php5:apache-5.6 -t neffets/php5:latest -f 5.6/xenial/apache/Dockerfile 5.6/xenial/apache/
+docker push neffets/php5:apache-5.6
+docker push neffets/php5:latest
+

@@ -149,10 +149,10 @@ RUN set -xe; \
 		wget -O php.tar.xz.asc "$PHP_ASC_URL"; \
 		export GNUPGHOME="$(mktemp -d)"; \
 		for key in $GPG_KEYS; do \
-            ping -c 1 ha.pool.sks-keyservers.net || echo "ping warmup - now starting gpg" \
-			gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || echo "First try failed"; \
-			gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || echo "Second try failed"; \
-			gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || echo "Third try failed"; \
+            ping -c 1 keyserver.ubuntu.com || echo "ping warmup - now starting gpg" \
+			gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key" || echo "First try failed"; \
+			gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key" || echo "Second try failed"; \
+			gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key" || echo "Third try failed"; \
 		done; \
 		gpg --batch --verify php.tar.xz.asc php.tar.xz; \
 		rm -rf "$GNUPGHOME"; \
